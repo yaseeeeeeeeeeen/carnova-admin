@@ -1,5 +1,6 @@
 import 'package:carnova_webapp/resources/components/custom_textfield.dart';
 import 'package:carnova_webapp/resources/components/loading_button.dart';
+import 'package:carnova_webapp/resources/components/navbar.dart';
 import 'package:carnova_webapp/resources/constants/imagepath.dart';
 import 'package:carnova_webapp/resources/constants/lottiepath.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,7 @@ class LoginPage extends StatelessWidget {
                   Text(
                     "WELCOME TO CARNOVA",
                     style: GoogleFonts.outfit(
-                        fontSize: 40,
+                        fontSize: 28,
                         color: Colors.black,
                         fontWeight: FontWeight.bold),
                   )
@@ -76,8 +77,13 @@ class LoginPage extends StatelessWidget {
                       obscureText: false),
                   const SizedBox(height: 20),
                   MyLoadingButton(
-                      title: "LOGIN", isLoading: false, onTap: () {
-                        
+                      title: "LOGIN",
+                      isLoading: false,
+                      onTap: () {
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => const ScreenParent()),
+                            (route) => false);
                       })
                 ]),
               ),

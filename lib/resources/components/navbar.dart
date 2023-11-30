@@ -1,9 +1,11 @@
+import 'package:carnova_webapp/resources/constants/imagepath.dart';
+import 'package:carnova_webapp/utils/colors.dart';
 import 'package:carnova_webapp/view/home_screen.dart';
 import 'package:carnova_webapp/view/host/host_pending.dart';
 import 'package:carnova_webapp/view/host/host_verified.dart';
-import 'package:carnova_webapp/view/host/vehicles/all_vehicles.dart';
-import 'package:carnova_webapp/view/host/vehicles/verification_pending.dart';
-import 'package:carnova_webapp/view/host/vehicles/verified_vehicles.dart';
+import 'package:carnova_webapp/view/vehicles/all_vehicles.dart';
+import 'package:carnova_webapp/view/vehicles/verification_pending.dart';
+import 'package:carnova_webapp/view/vehicles/verified_vehicles.dart';
 import 'package:floating_tabbar/Models/tab_item.dart';
 import 'package:floating_tabbar/Widgets/top_tabbar.dart';
 import 'package:floating_tabbar/floating_tabbar.dart';
@@ -61,39 +63,56 @@ class _HomeState extends State<ScreenParent> {
           selectedLeadingIcon: const Icon(Icons.home),
           title: Text("Home", style: style2),
           tab: const HomeScreen(),
-          badgeCount: 10,
+          //ba
+          // badgeCount: 12,
         ),
         TabItem(
           onTap: () {},
           selectedLeadingIcon: const Icon(Icons.directions_car_outlined),
           title: Text("Vehicles", style: style2),
-          tab: TopTabBar(children: topTabbarTabItemlist()),
+          tab: TopTabBar(
+            children: topTabbarTabItemlist(),
+            indicatorColor: ColorsModel.thridColour,
+          ),
         ),
         TabItem(
           title: Text("Hosts", style: style2),
           onTap: () {},
           selectedLeadingIcon: const Icon(Icons.person),
-          tab: TopTabBar(children: hostScreenTabbar()),
+          tab: TopTabBar(
+            children: hostScreenTabbar(),
+            indicatorColor: ColorsModel.thridColour,
+          ),
         ),
-        TabItem(
-          onTap: () {},
-          selectedLeadingIcon:  const Icon(Icons.flight_rounded),
-          title: Text("All Vehicles", style: style2),
-          tab: const AllVehicles(),
-        ),
+        // TabItem(
+        //   onTap: () {},
+        //   selectedLeadingIcon: const Icon(Icons.flight_rounded),
+        //   title: Text("All Vehicles", style: style2),
+        //   tab: const AllVehicles(),
+        // ),
         TabItem(
             title: Text("Settings", style: style2),
-            onTap: () {
-              // Navigator.of(context).push(
-              //     MaterialPageRoute(builder: (context) => const ShowCase()));
-            },
-            selectedLeadingIcon:const Icon(Icons.settings),
-            tab: Center(child: Text("ShowCase", style: style1)))
+            onTap: () {},
+            selectedLeadingIcon: const Icon(Icons.settings),
+            tab: Center(child: Text("Settings", style: style1)))
       ];
       return list;
     }
 
     return FloatingTabBar(
+      activeColor: Colors.grey.shade400,
+      parentAppbar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 2,
+        title: Container(
+          height: MediaQuery.sizeOf(context).height / 10,
+          width: MediaQuery.sizeOf(context).width / 7,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(ImagePaths.applogoBlack),
+                  fit: BoxFit.cover)),
+        ),
+      ),
       children: tabList(),
       useNautics: true,
     );

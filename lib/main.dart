@@ -1,6 +1,5 @@
 import 'package:carnova_webapp/resources/components/navbar.dart';
 import 'package:carnova_webapp/utils/colors.dart';
-import 'package:carnova_webapp/view/login/login.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -24,7 +23,7 @@ class _MyAppState extends State<MyApp> {
           brightness: Brightness.light,
           primaryColor: ColorsModel.primary,
           canvasColor: Colors.grey.shade300),
-      home: LoginPage(),
+      home: const ScreenParent(),
     );
   }
 }
