@@ -3,7 +3,6 @@ import 'package:carnova_webapp/utils/colors.dart';
 import 'package:carnova_webapp/view/home_screen.dart';
 import 'package:carnova_webapp/view/host/host_pending.dart';
 import 'package:carnova_webapp/view/host/host_verified.dart';
-import 'package:carnova_webapp/view/vehicles/all_vehicles.dart';
 import 'package:carnova_webapp/view/vehicles/verification_pending.dart';
 import 'package:carnova_webapp/view/vehicles/verified_vehicles.dart';
 import 'package:floating_tabbar/Models/tab_item.dart';
@@ -22,7 +21,7 @@ class ScreenParent extends StatefulWidget {
 
 class _HomeState extends State<ScreenParent> {
   TextStyle style1 = GoogleFonts.outfit(fontSize: 30);
-  TextStyle style2 = GoogleFonts.outfit();
+  TextStyle style2 = GoogleFonts.outfit(fontSize: 20);
   List<TabItem> hostScreenTabbar() {
     List<TabItem> topTabbarTabItemlist = [
       TabItem(
@@ -102,6 +101,12 @@ class _HomeState extends State<ScreenParent> {
     return FloatingTabBar(
       activeColor: Colors.grey.shade400,
       parentAppbar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.logout_outlined, color: Colors.red)),
+          const SizedBox(width: 20)
+        ],
         backgroundColor: Colors.white,
         elevation: 2,
         title: Container(

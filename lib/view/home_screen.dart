@@ -1,31 +1,21 @@
 import 'dart:math';
 
+import 'package:carnova_webapp/resources/components/image_slider.dart';
+import 'package:carnova_webapp/resources/constants/imagepath.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    TextStyle style1 = GoogleFonts.outfit(fontSize: 18);
     double h = MediaQuery.sizeOf(context).height;
     double w = MediaQuery.sizeOf(context).width;
-    return Container(
-        height: h,
-        width: w,
-        margin: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-            color: Colors.amber, borderRadius: BorderRadius.circular(20)),
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: 1.5, crossAxisCount: 3),
-          itemBuilder: (context, index) => Container(
-            decoration: BoxDecoration(
-                color:
-                    Colors.primaries[Random().nextInt(Colors.primaries.length)],
-                borderRadius: BorderRadius.circular(10)),
-            margin: const EdgeInsets.all(10),
-          ),
-          itemCount: 5,
-        ));
+    return Center(
+      child: Text("Home Screen", style: style1),
+    );
   }
 }

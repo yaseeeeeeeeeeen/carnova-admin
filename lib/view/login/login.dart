@@ -1,3 +1,4 @@
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:carnova_webapp/resources/components/custom_textfield.dart';
 import 'package:carnova_webapp/resources/components/loading_button.dart';
 import 'package:carnova_webapp/resources/components/navbar.dart';
@@ -80,10 +81,18 @@ class LoginPage extends StatelessWidget {
                       title: "LOGIN",
                       isLoading: false,
                       onTap: () {
-                        Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (context) => const ScreenParent()),
-                            (route) => false);
+                        if (usernameController.text == "admin@123" &&
+                            passwordController.text == "12345") {
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (context) => const ScreenParent()),
+                              (route) => false);
+                        } else {
+                          AnimatedSnackBar.material(
+                            'Something Wrong Try Again',
+                            type: AnimatedSnackBarType.error,
+                          ).show(context);
+                        }
                       })
                 ]),
               ),
