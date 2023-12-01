@@ -1,18 +1,21 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
+import 'package:carnova_webapp/bloc/login/login_bloc.dart';
 import 'package:carnova_webapp/resources/components/custom_textfield.dart';
 import 'package:carnova_webapp/resources/components/loading_button.dart';
 import 'package:carnova_webapp/resources/components/navbar.dart';
 import 'package:carnova_webapp/resources/constants/imagepath.dart';
 import 'package:carnova_webapp/resources/constants/lottiepath.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
-  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.sizeOf(context).height;
@@ -65,35 +68,39 @@ class LoginPage extends StatelessWidget {
                       validation: (value) {
                         return null;
                       },
-                      controller: usernameController,
+                      controller: emailController,
                       hintText: "ENTER NAME",
                       obscureText: false),
                   const SizedBox(height: 20),
                   MyTextField(
-                      validation: (value) {
-                        return null;
-                      },
+                      validation: (value) => null,
                       controller: passwordController,
                       hintText: "ENTER PASSWORD",
                       obscureText: false),
                   const SizedBox(height: 20),
-                  MyLoadingButton(
-                      title: "LOGIN",
-                      isLoading: false,
-                      onTap: () {
-                        if (usernameController.text == "admin@123" &&
-                            passwordController.text == "12345") {
-                          Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (context) => const ScreenParent()),
-                              (route) => false);
-                        } else {
-                          AnimatedSnackBar.material(
-                            'Something Wrong Try Again',
-                            type: AnimatedSnackBarType.error,
-                          ).show(context);
-                        }
-                      })
+                  BlocConsumer<LoginBloc, LoginState>(
+                    listener: (context, state) {
+                      if (state is LoginSuccsessState) {
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => const ScreenParent()),
+                            (route) => false);
+                      } else if (state is LoginFailedState) {
+                        AnimatedSnackBar.material(
+                          'Wrong Password',
+                          type: AnimatedSnackBarType.error,
+                        ).show(context);
+                      }
+                    },
+                    builder: (context, state) {
+                      return MyLoadingButton(
+                          title: "LOGIN",
+                          isLoading: state is LoadingState,
+                          onTap: () {
+                            loginButtonValidation(context);
+                          });
+                    },
+                  )
                 ]),
               ),
             ),
@@ -101,5 +108,22 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  loginButtonValidation(BuildContext context) {
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      String email = emailController.text.trim();
+      String password = passwordController.text.trim();
+      final loginData = {
+        'email': email,
+        'password': password,
+      };
+
+      context.read<LoginBloc>().add(LoginButtonClickedEvent(data: loginData));
+    }
+    AnimatedSnackBar.material(
+      'ADD NAME AND PASSWORD',
+      type: AnimatedSnackBarType.error,
+    ).show(context);
   }
 }
