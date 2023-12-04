@@ -97,7 +97,15 @@ class LoginPage extends StatelessWidget {
                           title: "LOGIN",
                           isLoading: state is LoadingState,
                           onTap: () {
-                            loginButtonValidation(context);
+                            if (emailController.text.isNotEmpty &&
+                                passwordController.text.isNotEmpty) {
+                              loginButtonValidation(context);
+                            } else {
+                              AnimatedSnackBar.material(
+                                'ADD NAME AND PASSWORD',
+                                type: AnimatedSnackBarType.error,
+                              ).show(context);
+                            }
                           });
                     },
                   )
@@ -111,19 +119,13 @@ class LoginPage extends StatelessWidget {
   }
 
   loginButtonValidation(BuildContext context) {
-    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
-      String email = emailController.text.trim();
-      String password = passwordController.text.trim();
-      final loginData = {
-        'email': email,
-        'password': password,
-      };
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+    final loginData = {
+      'email': email,
+      'password': password,
+    };
 
-      context.read<LoginBloc>().add(LoginButtonClickedEvent(data: loginData));
-    }
-    AnimatedSnackBar.material(
-      'ADD NAME AND PASSWORD',
-      type: AnimatedSnackBarType.error,
-    ).show(context);
+    context.read<LoginBloc>().add(LoginButtonClickedEvent(data: loginData));
   }
 }

@@ -48,7 +48,7 @@ class _HomeState extends State<ScreenParent> {
       TabItem(
         onTap: () {},
         title: Text("Pending Vehicle", style: style2),
-        tab: const PendingVerification(),
+        tab:  VehicleScreen(),
       ),
     ];
     return topTabbarTabItemlist;
