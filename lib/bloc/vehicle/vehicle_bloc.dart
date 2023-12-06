@@ -28,9 +28,11 @@ class VehicleBloc extends Bloc<VehicleEvent, VehicleState> {
       // print(body);
       final vehicleData = body.map((e) => VehicleModel.fromJson(e)).toList();
 
+      // List<VehicleModel> verifiedVehicles = [];
+      // List<VehicleModel> verificationPending = [];
+
       List<List<VehicleModel>> listOfVehicle = [];
       List<VehicleModel> sublistOfVehicle = [];
-
       for (var i = 0; i < vehicleData.length; i++) {
         sublistOfVehicle.add(vehicleData[i]);
 

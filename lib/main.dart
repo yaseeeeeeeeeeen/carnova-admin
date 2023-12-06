@@ -4,8 +4,8 @@ import 'package:carnova_webapp/bloc/vehicle/vehicle_bloc.dart';
 import 'package:carnova_webapp/data/sharedpreference/admin_token.dart';
 
 import 'package:carnova_webapp/utils/colors.dart';
-import 'package:carnova_webapp/view/login/login.dart';
 import 'package:carnova_webapp/view/splash_screen.dart';
+import 'package:carnova_webapp/view/vehicles/vehicle_deteails.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
               brightness: Brightness.light,
               primaryColor: ColorsModel.primary,
               canvasColor: Colors.grey.shade300),
-          home: SplashScreen(),
+          home: const SplashScreen(),
         ));
   }
 }

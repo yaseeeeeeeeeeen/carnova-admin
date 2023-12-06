@@ -32,6 +32,7 @@ dependencies:
   bloc: ^8.1.2
   carousel_slider: ^4.2.1
   cupertino_icons: ^1.0.2
+  fab_circular_menu_plus: ^0.0.1
   floating_tabbar: ^0.0.13
   flutter:
     sdk: flutter

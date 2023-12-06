@@ -1,9 +1,12 @@
 import 'package:carnova_webapp/bloc/vehicle/vehicle_bloc.dart';
 import 'package:carnova_webapp/modal/vehicle_data.dart';
 import 'package:carnova_webapp/resources/api_urls.dart/api_urls.dart';
-import 'package:carnova_webapp/resources/components/carrow.dart';
-import 'package:carnova_webapp/resources/components/loading_button.dart';
-import 'package:carnova_webapp/resources/components/vehicle_deteails.dart';
+import 'package:carnova_webapp/resources/components/car_list/carrow.dart';
+import 'package:carnova_webapp/resources/components/buttons/loading_button.dart';
+import 'package:carnova_webapp/resources/constants/svgpath.dart';
+import 'package:carnova_webapp/resources/constants/text_styles.dart';
+import 'package:carnova_webapp/utils/colors.dart';
+import 'package:carnova_webapp/view/vehicles/vehicle_deteails.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,10 +24,13 @@ class _VehicleScreenState extends State<VehicleScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double h = MediaQuery.sizeOf(context).height;
+    double w = MediaQuery.sizeOf(context).width;
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const SizedBox(height: 20),
           Expanded(
             child: BlocBuilder<VehicleBloc, VehicleState>(
               builder: (context, state) {
@@ -34,124 +40,70 @@ class _VehicleScreenState extends State<VehicleScreen> {
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 20,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
                     ),
                     itemCount: state.vehicleModelList[currentPage].length,
                     itemBuilder: (BuildContext context, int index) {
                       VehicleModel vehicle =
                           state.vehicleModelList[currentPage][index];
-                      return Column(
-                        children: [
-                          Expanded(
-                            child: SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.9,
-                              width: MediaQuery.of(context).size.width * 0.27,
-                              child: Card(
-                                color: const Color.fromARGB(255, 227, 227, 227),
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(15),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                        child: CarouselSlider(
-                                          items: vehicle.images
-                                              .map((e) => Image.network(
-                                                    '${Url.baseUrl}/$e',
-                                                    height:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            0.28,
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            0.2,
-                                                    fit: BoxFit.cover,
-                                                  ))
-                                              .toList(),
-                                          options: CarouselOptions(
-                                            aspectRatio: 16 / 9,
-                                            viewportFraction: 0.8,
-                                            enableInfiniteScroll: true,
-                                            autoPlayCurve: Curves.fastOutSlowIn,
-                                            enlargeCenterPage: true,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text('${vehicle.brand} ${vehicle.name}',
-                                            style:
-                                                const TextStyle(fontSize: 18)),
-                                        const SizedBox(width: 10),
-                                        vehicle.isVerified == true
-                                            ? const Icon(
-                                                Icons.verified,
-                                                color: Colors.blue,
-                                                size: 18,
-                                              )
-                                            : const SizedBox()
-                                      ],
-                                    ),
-                                    const SizedBox(height: 5),
-                                    Text(
-                                      '₹ ${vehicle.price}',
-                                      style: const TextStyle(
-                                          color: Colors.red, fontSize: 18),
-                                    ),
-                                    const SizedBox(height: 10),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        CarRowWidget(
-                                            image:
-                                                'assets/images/petrol-pump.svg',
-                                            title: vehicle.fuel),
-                                        CarRowWidget(
-                                            image: 'assets/images/car.svg',
-                                            title: vehicle.model.toString()),
-                                        CarRowWidget(
-                                            image:
-                                                'assets/images/settings-bold.svg',
-                                            title: vehicle.transmission)
-                                      ],
-                                    ),
-                                    const SizedBox(height: 10),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        CarRowWidget(
-                                            image:
-                                                'assets/images/location-filled.svg',
-                                            title: vehicle.location),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 10),
-                                    InkWell(
-                                        onTap: () => Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    VehicleDetailsScreen(
-                                                      vehicleModel: vehicle,
-                                                    ))),
-                                        child:
-                                         const   MyLoadingButton(title: 'View Details',isLoading: false))
-                                  ],
+                      return Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: h / 3.5,
+                                width: w / 3.5,
+                                child: CarouselSlider(
+                                  items: vehicle.images
+                                      .map((e) => Image.network(
+                                            '${Url.baseUrl}/$e',
+                                            fit: BoxFit.cover,
+                                          ))
+                                      .toList(),
+                                  options: CarouselOptions(
+                                    autoPlay: true,
+                                    aspectRatio: 16 / 9,
+                                    viewportFraction: 0.8,
+                                    enableInfiniteScroll: true,
+                                    autoPlayCurve: Curves.easeInCubic,
+                                    enlargeCenterPage: true,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
-                        ],
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("${vehicle.name} (${vehicle.brand})",
+                                      style: Fontstyles.vehicleCardName),
+                                  const SizedBox(width: 5),
+                                  vehicle.isVerified
+                                      ? const Icon(Icons.verified,
+                                          color: Colors.blue)
+                                      : const SizedBox()
+                                ],
+                              ),
+                              Text(
+                                  "HOST :  ${vehicle.createdBy.name.toUpperCase()}",
+                                  style: Fontstyles.vehicleCardhost),
+                              Text(vehicle.location,
+                                  style: Fontstyles.vehicleCardlocation),
+                              SubLoadingButton(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                VehicleDetailsScreen(
+                                                  vehicleModel: vehicle,
+                                                )));
+                                  },
+                                  title: 'View Details',
+                                  isLoading: false)
+                            ]),
                       );
                     },
                   );
@@ -166,6 +118,12 @@ class _VehicleScreenState extends State<VehicleScreen> {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 300),
                   child: NumberPaginator(
+                    config: NumberPaginatorUIConfig(
+                        buttonSelectedForegroundColor: Colors.white,
+                        buttonUnselectedForegroundColor: Colors.white,
+                        buttonSelectedBackgroundColor: ColorsModel.thridColour,
+                        buttonUnselectedBackgroundColor:
+                            ColorsModel.thridColour.withOpacity(0.3)),
                     numberPages: state.vehicleModelList.length,
                     onPageChange: (index) {
                       setState(() {

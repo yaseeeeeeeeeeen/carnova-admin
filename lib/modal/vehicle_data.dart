@@ -62,7 +62,7 @@ class VehicleModel {
       'transmission': transmission,
       'brand': brand,
       'fuel': fuel,
-      'seat':seat,
+      'seat': seat,
       'location': location,
       'createdBy': createdBy.toJson(),
       'images': images,
@@ -80,11 +80,13 @@ class CreatedBy {
   String email;
   int phone;
   String password;
+  String? profile;
   bool isBlocked;
   bool isVerified;
   int v;
 
   CreatedBy({
+    this.profile,
     required this.id,
     required this.name,
     required this.email,
@@ -104,6 +106,7 @@ class CreatedBy {
       password: json['password'],
       isBlocked: json['isBlocked'],
       isVerified: json['isVerified'],
+      profile: json['profile'],
       v: json['__v'],
     );
   }
@@ -117,6 +120,7 @@ class CreatedBy {
       'password': password,
       'isBlocked': isBlocked,
       'isVerified': isVerified,
+      'profile': profile,
       '__v': v,
     };
   }

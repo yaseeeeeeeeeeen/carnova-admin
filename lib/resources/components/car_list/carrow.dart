@@ -1,3 +1,4 @@
+import 'package:carnova_webapp/resources/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -17,7 +18,7 @@ class CarRowWidget extends StatelessWidget {
           width: 20,
         ),
         const SizedBox(width: 5),
-        Text(title)
+        Text(title, style: Fontstyles.vehicleCardtrans)
       ],
     );
   }

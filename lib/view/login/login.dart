@@ -1,7 +1,8 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:carnova_webapp/bloc/login/login_bloc.dart';
+import 'package:carnova_webapp/bloc/vehicle/vehicle_bloc.dart';
 import 'package:carnova_webapp/resources/components/custom_textfield.dart';
-import 'package:carnova_webapp/resources/components/loading_button.dart';
+import 'package:carnova_webapp/resources/components/buttons/loading_button.dart';
 import 'package:carnova_webapp/resources/components/navbar.dart';
 import 'package:carnova_webapp/resources/constants/imagepath.dart';
 import 'package:carnova_webapp/resources/constants/lottiepath.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
+// ignore: must_be_immutable
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
@@ -81,6 +83,8 @@ class LoginPage extends StatelessWidget {
                   BlocConsumer<LoginBloc, LoginState>(
                     listener: (context, state) {
                       if (state is LoginSuccsessState) {
+                        context.read<VehicleBloc>().add(
+                            VehicleFetchVehicleDataEvent(token: state.token));
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
                                 builder: (context) => const ScreenParent()),

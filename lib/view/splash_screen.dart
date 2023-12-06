@@ -18,9 +18,14 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     loginCheck(context);
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text('CARVIO'),
+        child: SizedBox(
+          height: MediaQuery.sizeOf(context).height / 2,
+          width: MediaQuery.sizeOf(context).width / 2,
+          child:
+              const Image(image: AssetImage('assets/images/applogoBlack.png')),
+        ),
       ),
     );
   }
