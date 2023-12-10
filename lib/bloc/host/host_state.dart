@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'host_bloc.dart';
 
 abstract class HostState {}
@@ -8,7 +9,12 @@ final class HostInitial extends HostState {}
 
 class LoadingState extends HostState {}
 
-class HostApprovelFailedState extends HostState {}
+class HostApprovelFailedState extends HostState {
+  String message;
+  HostApprovelFailedState({
+    required this.message
+  });
+}
 
 class HostFetchAllHostsLoadingState extends HostState {}
 

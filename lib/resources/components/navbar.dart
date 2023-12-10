@@ -29,7 +29,7 @@ class _HomeState extends State<ScreenParent> {
 
         },
         title: Text("Verified Host", style: style2),
-        tab:  VerifiedHosts(verifiedHostList: verifiedHost),
+        tab:  const VerifiedHosts(),
       ),
       TabItem(
         onTap: () {},

@@ -63,5 +63,3 @@ class HostModal {
 }
 
 
-  List<HostModal> pendingHost = [];
-  List<HostModal> verifiedHost = [];
