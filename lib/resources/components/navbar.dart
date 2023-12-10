@@ -1,3 +1,4 @@
+import 'package:carnova_webapp/modal/host_modal.dart';
 import 'package:carnova_webapp/resources/constants/imagepath.dart';
 import 'package:carnova_webapp/utils/colors.dart';
 import 'package:carnova_webapp/view/home_screen.dart';
@@ -14,20 +15,21 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ScreenParent extends StatefulWidget {
   const ScreenParent({Key? key}) : super(key: key);
-
   @override
   State<ScreenParent> createState() => _HomeState();
 }
-
 class _HomeState extends State<ScreenParent> {
+ 
   TextStyle style1 = GoogleFonts.outfit(fontSize: 30);
   TextStyle style2 = GoogleFonts.outfit(fontSize: 20);
   List<TabItem> hostScreenTabbar() {
     List<TabItem> topTabbarTabItemlist = [
       TabItem(
-        onTap: () {},
+        onTap: () {
+
+        },
         title: Text("Verified Host", style: style2),
-        tab: const VerifiedHosts(),
+        tab:  VerifiedHosts(verifiedHostList: verifiedHost),
       ),
       TabItem(
         onTap: () {},

@@ -23,7 +23,7 @@ final class VehicleVerifyHostVehicleErrorState extends VehicleState {}
 final class VehicleFetchHostDataState extends VehicleState {}
 
 final class VehicleFetchHostDataSuccessState extends VehicleState {
-  List<CreatedBy> hostData = [];
+  List<HostModal> hostData = [];
   VehicleFetchHostDataSuccessState({required this.hostData});
 }
 

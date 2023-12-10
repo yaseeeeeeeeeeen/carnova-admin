@@ -1,9 +1,7 @@
 import 'package:carnova_webapp/bloc/vehicle/vehicle_bloc.dart';
 import 'package:carnova_webapp/modal/vehicle_data.dart';
 import 'package:carnova_webapp/resources/api_urls.dart/api_urls.dart';
-import 'package:carnova_webapp/resources/components/car_list/carrow.dart';
 import 'package:carnova_webapp/resources/components/buttons/loading_button.dart';
-import 'package:carnova_webapp/resources/constants/svgpath.dart';
 import 'package:carnova_webapp/resources/constants/text_styles.dart';
 import 'package:carnova_webapp/utils/colors.dart';
 import 'package:carnova_webapp/view/vehicles/vehicle_deteails.dart';

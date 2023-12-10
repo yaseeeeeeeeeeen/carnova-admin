@@ -47,6 +47,7 @@ class ApiService {
       'Cookie': 'jwtHost=$token'
     };
     final response = await http.get(url, headers: header);
+    print("Host Data ${response.body}");
     return response;
   }
 

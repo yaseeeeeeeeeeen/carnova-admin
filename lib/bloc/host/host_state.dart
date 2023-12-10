@@ -13,8 +13,8 @@ class HostApprovelFailedState extends HostState {}
 class HostFetchAllHostsLoadingState extends HostState {}
 
 class HostFetchAllHostsSuccessState extends HostState {
-  List<CreatedBy> hostVerifiedData;
-  List<CreatedBy> hostPendigData;
+  List<HostModal> hostVerifiedData;
+  List<HostModal> hostPendigData;
   HostFetchAllHostsSuccessState(
       {required this.hostPendigData, required this.hostVerifiedData});
 }

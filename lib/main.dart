@@ -4,8 +4,7 @@ import 'package:carnova_webapp/bloc/vehicle/vehicle_bloc.dart';
 import 'package:carnova_webapp/data/sharedpreference/admin_token.dart';
 
 import 'package:carnova_webapp/utils/colors.dart';
-import 'package:carnova_webapp/view/splash_screen.dart';
-import 'package:carnova_webapp/view/vehicles/vehicle_deteails.dart';
+import 'package:carnova_webapp/view/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

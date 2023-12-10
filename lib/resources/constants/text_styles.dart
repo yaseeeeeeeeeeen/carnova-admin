@@ -17,4 +17,11 @@ class Fontstyles {
       GoogleFonts.outfit(fontSize: 18, fontWeight: FontWeight.w500);
         static TextStyle vehicledetailShost =
       GoogleFonts.outfit(fontSize: 18, fontWeight: FontWeight.w500);
-}
+
+
+
+  static TextStyle hostCardName =
+      GoogleFonts.outfit(fontSize: 20, fontWeight: FontWeight.w500);
+        static TextStyle hostCardemail =
+      GoogleFonts.outfit(fontSize: 17, fontWeight: FontWeight.w400);
+      }

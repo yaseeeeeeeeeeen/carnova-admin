@@ -16,8 +16,13 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     loginCheck(context);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: SizedBox(
@@ -38,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
       context
           .read<VehicleBloc>()
           .add(VehicleFetchVehicleDataEvent(token: token));
-      // context.read<HostBloc>().add(HostFetchDataEvent());
+      context.read<HostBloc>().add(HostFetchDataEvent());
 
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => const ScreenParent()),

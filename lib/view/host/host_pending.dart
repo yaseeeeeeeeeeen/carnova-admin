@@ -9,7 +9,7 @@ class HostPending extends StatelessWidget {
       margin:const EdgeInsets.all(10),
 
       decoration: BoxDecoration(
-              color: Colors.blueAccent,
+              color: Colors.blueGrey,
         borderRadius: BorderRadius.circular(20)
       ),
     );

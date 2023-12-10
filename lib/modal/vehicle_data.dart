@@ -1,3 +1,5 @@
+import 'package:carnova_webapp/modal/host_modal.dart';
+
 class VehicleModel {
   String id;
   String name;
@@ -8,7 +10,7 @@ class VehicleModel {
   int seat;
   String fuel;
   String location;
-  CreatedBy createdBy;
+  HostModal createdBy;
   List<String> images;
   bool isVerified;
   List<dynamic> review;
@@ -44,7 +46,7 @@ class VehicleModel {
       fuel: json['fuel'],
       seat: json['seat'],
       location: json['location'],
-      createdBy: CreatedBy.fromJson(json['createdBy']),
+      createdBy: HostModal.fromJson(json['createdBy']),
       images: List<String>.from(json['images']),
       isVerified: json['isVerified'],
       review: List<dynamic>.from(json['review']),
@@ -74,54 +76,4 @@ class VehicleModel {
   }
 }
 
-class CreatedBy {
-  String id;
-  String name;
-  String email;
-  int phone;
-  String password;
-  String? profile;
-  bool isBlocked;
-  bool isVerified;
-  int v;
 
-  CreatedBy({
-    this.profile,
-    required this.id,
-    required this.name,
-    required this.email,
-    required this.phone,
-    required this.password,
-    required this.isBlocked,
-    required this.isVerified,
-    required this.v,
-  });
-
-  factory CreatedBy.fromJson(Map<String, dynamic> json) {
-    return CreatedBy(
-      id: json['_id'],
-      name: json['name'],
-      email: json['email'],
-      phone: json['phone'],
-      password: json['password'],
-      isBlocked: json['isBlocked'],
-      isVerified: json['isVerified'],
-      profile: json['profile'],
-      v: json['__v'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      '_id': id,
-      'name': name,
-      'email': email,
-      'phone': phone,
-      'password': password,
-      'isBlocked': isBlocked,
-      'isVerified': isVerified,
-      'profile': profile,
-      '__v': v,
-    };
-  }
-}
