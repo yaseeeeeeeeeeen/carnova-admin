@@ -21,7 +21,6 @@ class VerifiedHosts extends StatelessWidget {
       listener: (context, state) {
         if (state is HostFetchAllHostsSuccessState) {
           verifiedHostList = state.hostVerifiedData;
-          print(state.hostVerifiedData[0].email);
         } else {
           print("something Wrong");
         }
