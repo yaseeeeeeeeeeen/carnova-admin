@@ -1,3 +1,4 @@
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:carnova_webapp/bloc/host/host_bloc.dart';
 import 'package:carnova_webapp/modal/host_modal.dart';
 import 'package:carnova_webapp/resources/api_urls.dart/api_urls.dart';
@@ -22,7 +23,10 @@ class VerifiedHosts extends StatelessWidget {
         if (state is HostFetchAllHostsSuccessState) {
           verifiedHostList = state.hostVerifiedData;
         } else {
-          print("something Wrong");
+          AnimatedSnackBar.material(
+            "Something Wrong",
+            type: AnimatedSnackBarType.error,
+          ).show(context);
         }
       },
       builder: (context, state) {

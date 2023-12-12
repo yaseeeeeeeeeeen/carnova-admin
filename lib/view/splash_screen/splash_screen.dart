@@ -39,7 +39,6 @@ class _SplashScreenState extends State<SplashScreen> {
   loginCheck(BuildContext context) async {
     await Future.delayed(const Duration(seconds: 2));
     final token = Sharedpref.instance.getToken();
-    print('token is $token');
     if (token != null) {
       context
           .read<VehicleBloc>()
@@ -47,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
       // context.read<HostBloc>().add(HostFetchDataEvent());
 
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const ScreenParent()),
+          MaterialPageRoute(builder: (context) => ScreenParent()),
           (route) => false);
     } else {
       Navigator.of(context)

@@ -26,7 +26,7 @@ class VehicleBloc extends Bloc<VehicleEvent, VehicleState> {
     print(response.body);
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body) as List;
-      // print(body);
+  
       final vehicleData = body.map((e) => VehicleModel.fromJson(e)).toList();
 
       // List<VehicleModel> verifiedVehicles = [];

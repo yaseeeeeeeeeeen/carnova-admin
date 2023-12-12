@@ -4,6 +4,7 @@ abstract class VehicleEvent {}
 
 class VehicleFetchVehicleDataEvent extends VehicleEvent {
   final String? token;
+  
   VehicleFetchVehicleDataEvent({required this.token});
 }
 

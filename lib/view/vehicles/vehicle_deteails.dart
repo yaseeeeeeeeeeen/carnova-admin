@@ -1,9 +1,11 @@
 import 'package:carnova_webapp/bloc/vehicle/vehicle_bloc.dart';
 import 'package:carnova_webapp/modal/vehicle_data.dart';
 import 'package:carnova_webapp/resources/api_urls.dart/api_urls.dart';
+import 'package:carnova_webapp/resources/components/navbar.dart';
 
 import 'package:carnova_webapp/resources/constants/imagepath.dart';
 import 'package:carnova_webapp/resources/constants/text_styles.dart';
+import 'package:carnova_webapp/utils/verification_succsessbox.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fab_circular_menu_plus/fab_circular_menu_plus.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +28,11 @@ class VehicleDetailsScreen extends StatelessWidget {
           listener: (context, state) {
             if (state is VehicleVerifyHostVehicleSuccessState) {
               isVerifeid = true;
+              AlertBoxes().showSuccessDialog(context, "Verification Succsess",
+                  () {
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => ScreenParent()));
+              });
               print("verified Succsess");
               // AlertBoxes().showSuccessDialog(context, 'Veified Success');
             } else {

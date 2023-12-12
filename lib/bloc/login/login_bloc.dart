@@ -23,10 +23,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final data = await jsonDecode(body);
       String token = data['token'];
       Sharedpref.instance.storeToken(token);
-      print("Token=======$token");
+      // print("Token=======$token");
       emit(LoginSuccsessState(token: token));
     } else {
-      print("Something Wrong--------${response.bodyBytes.toString()}");
+      // print("Something Wrong--------${response.bodyBytes.toString()}");
       emit(LoginFailedState());
     }
   }

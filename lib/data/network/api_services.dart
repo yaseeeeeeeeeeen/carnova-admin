@@ -70,8 +70,7 @@ class ApiService {
       'Cookie': 'jwtHost=$token'
     };
     final response = await http.get(url, headers: header);
-    print(response.statusCode);
-    print(response.body);
+
     return response;
   }
 }

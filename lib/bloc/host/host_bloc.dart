@@ -30,7 +30,7 @@ class HostBloc extends Bloc<HostEvent, HostState> {
         emit(HostFetchAllHostsSuccessState(
             hostPendigData: pendingHost, hostVerifiedData: verifiedHost));
       } else {
-        emit(HostApprovelFailedState(message: "Verification Failed"));
+        emit(HostApprovelFailedState(message: "Verification"));
       }
     } else {
       print("Token is Null");

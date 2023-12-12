@@ -87,7 +87,7 @@ class LoginPage extends StatelessWidget {
                             VehicleFetchVehicleDataEvent(token: state.token));
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                                builder: (context) => const ScreenParent()),
+                                builder: (context) =>  ScreenParent()),
                             (route) => false);
                       } else if (state is LoginFailedState) {
                         AnimatedSnackBar.material(

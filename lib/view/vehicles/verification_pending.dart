@@ -1,4 +1,5 @@
 import 'package:carnova_webapp/bloc/vehicle/vehicle_bloc.dart';
+import 'package:carnova_webapp/data/sharedpreference/admin_token.dart';
 import 'package:carnova_webapp/modal/vehicle_data.dart';
 import 'package:carnova_webapp/resources/api_urls.dart/api_urls.dart';
 import 'package:carnova_webapp/resources/components/buttons/loading_button.dart';
@@ -9,6 +10,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:number_paginator/number_paginator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class VehicleScreen extends StatefulWidget {
   const VehicleScreen({super.key});
@@ -22,6 +24,8 @@ class _VehicleScreenState extends State<VehicleScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final token = Sharedpref.instance.getToken();
+    context.read<VehicleBloc>().add(VehicleFetchVehicleDataEvent(token: token));
     double h = MediaQuery.sizeOf(context).height;
     double w = MediaQuery.sizeOf(context).width;
     return Scaffold(
@@ -32,7 +36,6 @@ class _VehicleScreenState extends State<VehicleScreen> {
           Expanded(
             child: BlocBuilder<VehicleBloc, VehicleState>(
               builder: (context, state) {
-                print('state is $state');
                 if (state is VehicleFetchedDataState) {
                   return GridView.builder(
                     gridDelegate:

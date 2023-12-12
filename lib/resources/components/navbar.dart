@@ -14,22 +14,21 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ScreenParent extends StatefulWidget {
-  const ScreenParent({Key? key}) : super(key: key);
+  int? index;
+  ScreenParent({Key? key, this.index}) : super(key: key);
   @override
   State<ScreenParent> createState() => _HomeState();
 }
+
 class _HomeState extends State<ScreenParent> {
- 
   TextStyle style1 = GoogleFonts.outfit(fontSize: 30);
   TextStyle style2 = GoogleFonts.outfit(fontSize: 20);
   List<TabItem> hostScreenTabbar() {
     List<TabItem> topTabbarTabItemlist = [
       TabItem(
-        onTap: () {
-
-        },
+        onTap: () {},
         title: Text("Verified Host", style: style2),
-        tab:  const VerifiedHosts(),
+        tab: const VerifiedHosts(),
       ),
       TabItem(
         onTap: () {},
@@ -120,6 +119,7 @@ class _HomeState extends State<ScreenParent> {
                   fit: BoxFit.cover)),
         ),
       ),
+      useIndicator: true,
       children: tabList(),
       useNautics: true,
     );
