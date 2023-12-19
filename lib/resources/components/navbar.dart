@@ -60,23 +60,15 @@ class _HomeState extends State<ScreenParent> {
       List<TabItem> list = [
         TabItem(
           onTap: () {},
-          selectedLeadingIcon: const Icon(Icons.home),
-          title: Text("Home", style: style2),
-          tab: const HomeScreen(),
-          //ba
-          // badgeCount: 12,
-        ),
-        TabItem(
-          onTap: () {},
           selectedLeadingIcon: const Icon(Icons.directions_car_outlined),
-          title: Text("Vehicles", style: style2),
+          title: Text("VEHICLES", style: style2),
           tab: TopTabBar(
             children: topTabbarTabItemlist(),
             indicatorColor: ColorsModel.thridColour,
           ),
         ),
         TabItem(
-          title: Text("Hosts", style: style2),
+          title: Text("HOSTS", style: style2),
           onTap: () {},
           selectedLeadingIcon: const Icon(Icons.person),
           tab: TopTabBar(
@@ -84,12 +76,15 @@ class _HomeState extends State<ScreenParent> {
             indicatorColor: ColorsModel.thridColour,
           ),
         ),
-        // TabItem(
-        //   onTap: () {},
-        //   selectedLeadingIcon: const Icon(Icons.flight_rounded),
-        //   title: Text("All Vehicles", style: style2),
-        //   tab: const AllVehicles(),
-        // ),
+        TabItem(
+          onTap: () {},
+          selectedLeadingIcon:
+              const Icon(Icons.supervised_user_circle_outlined),
+          title: Text("USERS", style: style2),
+          tab: const HomeScreen(),
+          //ba
+          // badgeCount: 12,
+        ),
         TabItem(
             title: Text("Settings", style: style2),
             onTap: () {},

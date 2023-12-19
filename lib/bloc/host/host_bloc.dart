@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:carnova_webapp/data/network/api_services.dart';
 import 'package:carnova_webapp/data/sharedpreference/admin_token.dart';
 import 'package:carnova_webapp/modal/host_modal.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'host_event.dart';
 part 'host_state.dart';
@@ -19,7 +18,7 @@ class HostBloc extends Bloc<HostEvent, HostState> {
 
   FutureOr<void> hostAprovedClicked(
       HostAprovedClicked event, Emitter<HostState> emit) async {
-    emit(LoadingState());
+    emit(LoadingState(idx: event.index));
     String? token = Sharedpref.instance.getToken();
     if (token != null) {
       final response = await ApiService.instance.verifyHost(event.id, token);

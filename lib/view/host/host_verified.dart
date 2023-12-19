@@ -87,16 +87,45 @@ class VerifiedHosts extends StatelessWidget {
                       Text(data.email, style: Fontstyles.hostCardemail),
                       Text("PHONE : ${data.phone}",
                           style: Fontstyles.hostCardemail),
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black,
-                            fixedSize: const Size(200, 40)),
-                        child: Text(
-                          "VIEW DETAILES",
-                          style: Fontstyles.buttonText,
-                        ),
-                      )
+                        Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    fixedSize: const Size(200, 40)),
+                child: Text(
+                  "VIEW DETAILES",
+                  style: Fontstyles.buttonText,
+                ),
+              ),
+              BlocConsumer<HostBloc, HostState>(
+                listener: (context, state) {},
+                builder: (context, state) {
+          
+                  return ElevatedButton(
+                    onPressed: () {
+                      context
+                          .read<HostBloc>()
+                          .add(HostAprovedClicked(index: index, id: data.id));
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        fixedSize: Size(w / 14, 40)),
+                    child: state is !LoadingState
+                        ? Text(
+                            "VERIFY",
+                            style: Fontstyles.buttonText,
+                          )
+                        : const Center(
+                            child: CircularProgressIndicator(
+                                color: Colors.white, strokeWidth: 2)),
+                  );
+                },
+              ),
+            ],
+          )
                     ],
                   ),
                 );

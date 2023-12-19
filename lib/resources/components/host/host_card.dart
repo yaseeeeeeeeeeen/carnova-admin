@@ -10,7 +10,7 @@ class HostCardWid extends StatelessWidget {
   HostModal data;
   int index;
   HostCardWid({super.key, required this.data, required this.index});
-
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.sizeOf(context).height;
@@ -55,8 +55,10 @@ class HostCardWid extends StatelessWidget {
                   style: Fontstyles.buttonText,
                 ),
               ),
-              BlocBuilder<HostBloc, HostState>(
+              BlocConsumer<HostBloc, HostState>(
+                listener: (context, state) {},
                 builder: (context, state) {
+                  isLoading = state is LoadingState && state.index == index;
                   return ElevatedButton(
                     onPressed: () {
                       context
@@ -66,7 +68,7 @@ class HostCardWid extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,
                         fixedSize: Size(w / 14, 40)),
-                    child: state is! LoadingState
+                    child: !isLoading
                         ? Text(
                             "VERIFY",
                             style: Fontstyles.buttonText,
