@@ -22,6 +22,8 @@ final class VehicleVerifyHostVehicleErrorState extends VehicleState {}
 
 final class VehicleFetchHostDataState extends VehicleState {}
 
+final class VehicleVerifyLoading extends VehicleState{}
+
 final class VehicleFetchHostDataSuccessState extends VehicleState {
   List<HostModal> hostData = [];
   VehicleFetchHostDataSuccessState({required this.hostData});

@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:carnova_webapp/bloc/vehicle/vehicle_bloc.dart';
 import 'package:carnova_webapp/modal/vehicle_data.dart';
 import 'package:carnova_webapp/resources/api_urls.dart/api_urls.dart';
+import 'package:carnova_webapp/resources/components/buttons/verify_button.dart';
+import 'package:carnova_webapp/resources/components/image_preview.dart';
 import 'package:carnova_webapp/resources/components/navbar.dart';
 
 import 'package:carnova_webapp/resources/constants/imagepath.dart';
@@ -23,75 +27,6 @@ class VehicleDetailsScreen extends StatelessWidget {
     double h = MediaQuery.sizeOf(context).height;
     double w = MediaQuery.sizeOf(context).width;
     return Scaffold(
-      floatingActionButton: Builder(
-        builder: (context) => BlocConsumer<VehicleBloc, VehicleState>(
-          listener: (context, state) {
-            if (state is VehicleVerifyHostVehicleSuccessState) {
-              isVerifeid = true;
-              AlertBoxes().showSuccessDialog(context, "Verification Succsess",
-                  () {
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => ScreenParent()));
-              });
-              print("verified Succsess");
-              // AlertBoxes().showSuccessDialog(context, 'Veified Success');
-            } else {
-              isVerifeid = false;
-            }
-          },
-          builder: (context, state) {
-            return FabCircularMenuPlus(
-              key: fabKey,
-              alignment: Alignment.bottomRight,
-              ringColor: Colors.black.withAlpha(25),
-              ringDiameter: 400.0,
-              ringWidth: 100.0,
-              fabSize: 64.0,
-              fabElevation: 8.0,
-              fabIconBorder: const CircleBorder(),
-              fabColor: Colors.black,
-              fabOpenIcon: const Icon(Icons.menu, color: Colors.white),
-              fabCloseIcon: const Icon(Icons.close, color: Colors.white),
-              fabMargin: const EdgeInsets.all(16.0),
-              animationDuration: const Duration(milliseconds: 800),
-              animationCurve: Curves.easeInOutCirc,
-              onDisplayChange: (isOpen) {},
-              children: <Widget>[
-                RawMaterialButton(
-                  onPressed: () {
-                    // _showSnackBar(context, "You pressed 1");
-                  },
-                  shape: const CircleBorder(),
-                  padding: const EdgeInsets.all(24.0),
-                  child: const Icon(Icons.block, color: Colors.black),
-                ),
-                RawMaterialButton(
-                  onPressed: () {
-                    context.read<VehicleBloc>().add(VehicleVerifyHostVehicle(
-                        vehicleId: vehicleModel.id,
-                        hostId: vehicleModel.createdBy.id));
-                  },
-                  shape: const CircleBorder(),
-                  padding: const EdgeInsets.all(24.0),
-                  child: vehicleModel.isVerified
-                      ? const Icon(Icons.verified, color: Colors.blue)
-                      : const Icon(Icons.verified_outlined,
-                          color: Colors.black),
-                ),
-                RawMaterialButton(
-                  onPressed: () {
-                    // _showSnackBar(context, "You pressed 3");
-                  },
-                  shape: const CircleBorder(),
-                  padding: const EdgeInsets.all(24.0),
-                  child: const Icon(Icons.person_off_outlined,
-                      color: Colors.black),
-                ),
-              ],
-            );
-          },
-        ),
-      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(15),
@@ -137,16 +72,23 @@ class VehicleDetailsScreen extends StatelessWidget {
                       children: [
                         Text("VEHICLE DOCUMENT",
                             style: Fontstyles.vehicledetailShost),
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.black,
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                      "${Url.baseUrl}/${vehicleModel.document}"),
-                                  fit: BoxFit.cover)),
-                          height: h / 2.5,
-                          width: w / 3,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => ImagePreviewWid(
+                                    imageUrl: vehicleModel.document)));
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.black,
+                                image: DecorationImage(
+                                    image: NetworkImage(
+                                        "${Url.baseUrl}/${vehicleModel.document}"),
+                                    fit: BoxFit.cover)),
+                            height: h / 2.5,
+                            width: w / 3,
+                          ),
                         ),
                       ],
                     )
@@ -180,11 +122,20 @@ class VehicleDetailsScreen extends StatelessWidget {
                           width: w / 2.8,
                           child: CarouselSlider(
                               items: vehicleModel.images
-                                  .map((e) => Image.network(
-                                        '${Url.baseUrl}/$e',
-                                        height: h / 2.5,
-                                        width: w / 3,
-                                        fit: BoxFit.cover,
+                                  .map((e) => GestureDetector(
+                                        onDoubleTap: () {
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ImagePreviewWid(
+                                                          imageUrl: e)));
+                                        },
+                                        child: Image.network(
+                                          '${Url.baseUrl}/$e',
+                                          height: h / 2.5,
+                                          width: w / 3,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ))
                                   .toList(),
                               options: CarouselOptions(
@@ -220,19 +171,51 @@ class VehicleDetailsScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              vehicleModel.isVerified
+                  ? const SizedBox()
+                  : SizedBox(
+                      width: w,
+                      height: 70,
+                      child: BlocConsumer<VehicleBloc, VehicleState>(
+                        listener: (context, state) {
+                          if (state is VehicleVerifyHostVehicleSuccessState) {
+                            isVerifeid = true;
+                            AlertBoxes().showSuccessDialog(
+                                context, "Verification Succsess", () {
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: (context) => ScreenParent()));
+                            });
+                          }
+                        },
+                        builder: (context, state) {
+                          return Row(
+                            children: [
+                              LoadingWid2(
+                                  color: Colors.black,
+                                  ontap: () {
+                                    context.read<VehicleBloc>().add(
+                                        VehicleVerifyHostVehicle(
+                                            vehicleId: vehicleModel.id,
+                                            hostId: vehicleModel.createdBy.id));
+                                  },
+                                  text: "VERIFY",
+                                  isLoading: state is VehicleVerifyLoading),
+                              const SizedBox(width: 20),
+                              LoadingWid2(
+                                  color: Colors.red,
+                                  ontap: () {},
+                                  text: "REJECT",
+                                  isLoading: false)
+                            ],
+                          );
+                        },
+                      ),
+                    )
             ],
           ),
         ),
       ),
     );
   }
-
-  // void _showSnackBar(BuildContext context, String message) {
-  //   ScaffoldMessenger.of(context).showSnackBar(
-  //     SnackBar(
-  //       content: Text(message),
-  //       duration: const Duration(milliseconds: 1000),
-  //     ),
-  //   );
-  // }
 }

@@ -1,4 +1,3 @@
-import 'package:carnova_webapp/modal/host_modal.dart';
 import 'package:carnova_webapp/resources/constants/imagepath.dart';
 import 'package:carnova_webapp/utils/colors.dart';
 import 'package:carnova_webapp/view/home_screen.dart';
@@ -59,14 +58,15 @@ class _HomeState extends State<ScreenParent> {
     List<TabItem> tabList() {
       List<TabItem> list = [
         TabItem(
-          onTap: () {},
-          selectedLeadingIcon: const Icon(Icons.directions_car_outlined),
-          title: Text("VEHICLES", style: style2),
-          tab: TopTabBar(
-            children: topTabbarTabItemlist(),
-            indicatorColor: ColorsModel.thridColour,
-          ),
-        ),
+            onTap: () {},
+            selectedLeadingIcon: const Icon(Icons.directions_car_outlined),
+            title: Text("VEHICLES", style: style2),
+            tab: const VehicleScreen()
+            // TopTabBar(
+            // children: topTabbarTabItemlist(),
+            // indicatorColor: ColorsModel.thridColour,
+            //),
+            ),
         TabItem(
           title: Text("HOSTS", style: style2),
           onTap: () {},
