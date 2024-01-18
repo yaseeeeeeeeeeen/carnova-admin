@@ -11,13 +11,11 @@ import 'package:carnova_webapp/resources/constants/imagepath.dart';
 import 'package:carnova_webapp/resources/constants/text_styles.dart';
 import 'package:carnova_webapp/utils/verification_succsessbox.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:fab_circular_menu_plus/fab_circular_menu_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // ignore: must_be_immutable
 class VehicleDetailsScreen extends StatelessWidget {
-  final GlobalKey<FabCircularMenuPlusState> fabKey = GlobalKey();
   VehicleModel vehicleModel;
   bool? isVerifeid;
   VehicleDetailsScreen({super.key, required this.vehicleModel});
