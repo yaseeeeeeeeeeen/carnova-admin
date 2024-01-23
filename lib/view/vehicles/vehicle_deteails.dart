@@ -50,7 +50,7 @@ class VehicleDetailsScreen extends StatelessWidget {
                                   .createdBy.profile!.isEmpty
                               ? NetworkImage(ImagePaths.profiledemo)
                               : NetworkImage(
-                                  "${Url.baseUrl}/${vehicleModel.createdBy.profile!}"),
+                                  "${Url.imageGetingUrl}/${vehicleModel.createdBy.profile!}"),
                           radius: 70,
                         ),
                         Text(vehicleModel.createdBy.name,
@@ -82,7 +82,7 @@ class VehicleDetailsScreen extends StatelessWidget {
                                 color: Colors.black,
                                 image: DecorationImage(
                                     image: NetworkImage(
-                                        "${Url.baseUrl}/${vehicleModel.document}"),
+                                        "${Url.imageGetingUrl}/${vehicleModel.document}"),
                                     fit: BoxFit.cover)),
                             height: h / 2.5,
                             width: w / 3,
@@ -129,7 +129,7 @@ class VehicleDetailsScreen extends StatelessWidget {
                                                           imageUrl: e)));
                                         },
                                         child: Image.network(
-                                          '${Url.baseUrl}/$e',
+                                          '${Url.imageGetingUrl}/$e',
                                           height: h / 2.5,
                                           width: w / 3,
                                           fit: BoxFit.cover,

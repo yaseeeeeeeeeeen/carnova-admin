@@ -62,7 +62,7 @@ class _VehicleScreenState extends State<VehicleScreen> {
                                 child: CarouselSlider(
                                   items: vehicle.images
                                       .map((e) => Image.network(
-                                            '${Url.baseUrl}/$e',
+                                            '${Url.imageGetingUrl}/$e',
                                             fit: BoxFit.cover,
                                           ))
                                       .toList(),

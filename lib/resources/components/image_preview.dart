@@ -15,7 +15,7 @@ class ImagePreviewWid extends StatelessWidget {
       width: w,
       height: h,
       child: Image(
-          image: NetworkImage("${Url.baseUrl}/$imageUrl"), fit: BoxFit.cover),
+          image: NetworkImage("${Url.imageGetingUrl}/$imageUrl"), fit: BoxFit.cover),
     );
   }
 }

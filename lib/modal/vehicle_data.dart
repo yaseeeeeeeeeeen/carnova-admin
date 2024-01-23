@@ -40,7 +40,7 @@ class VehicleModel {
       id: json['_id'],
       name: json['name'],
       price: json['price'],
-      model: json['model'],
+      model: json['createdyear'],
       transmission: json['transmission'],
       brand: json['brand'],
       fuel: json['fuel'],
@@ -60,7 +60,7 @@ class VehicleModel {
       '_id': id,
       'name': name,
       'price': price,
-      'model': model,
+      'createdyear': model,
       'transmission': transmission,
       'brand': brand,
       'fuel': fuel,
@@ -75,5 +75,3 @@ class VehicleModel {
     };
   }
 }
-
-
